@@ -12,6 +12,8 @@ public class GridGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Screen.SetResolution(768, 640, false);
+
         for (int i = 0; i < gridWidth; i++)
         {
             for (int j = 0; j < gridHeight; j++)

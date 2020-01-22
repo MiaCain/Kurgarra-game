@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -37,9 +38,14 @@ public class Health : MonoBehaviour
             HeartToChange = HeartImage[i].GetComponent<RawImage>();
             HeartToChange.texture = HeartRed;          
         }
+
+        if (currentHealth <= 0) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "EnemyCom")
         {

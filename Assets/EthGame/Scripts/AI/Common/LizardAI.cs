@@ -11,7 +11,7 @@ public class LizardAI : MonoBehaviour
     public int health = 3;
     public float accTime = 3;
 
-
+    Vector3 pos;
     private bool CanMove = true;
     private Vector2 movement;
     private Vector2 knockbackDir;
@@ -22,6 +22,7 @@ public class LizardAI : MonoBehaviour
 
     private SpriteRenderer LizSprite;
     public EnemyFlash EnemyFlash;
+    public dropLootRandom dropLootRandom;
 
 
 
@@ -29,11 +30,26 @@ public class LizardAI : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
+        Player = GameObject.Find("Player");
+        dropLootRandom = this.gameObject.GetComponent<dropLootRandom>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
+        if (pos.x < 0.0 || 1.0 < pos.x || pos.y < 0.0 || 1.0 < pos.y)
+        {
+            CanMove = false;
+            movement = new Vector2(0f, 0f);
+        }
+
+        else
+        {
+            CanMove = true;
+        }
+
+
         if (CanMove == true) { 
         timeLeft -= Time.deltaTime;
         if (timeLeft <= 0)
@@ -59,6 +75,7 @@ public class LizardAI : MonoBehaviour
             this.tag = "EnemyDying";
             movement = new Vector2 (0f,0f);
             this.EnemyFlash.SpriteDeathEffect();
+            dropLootRandom.dropLoot();
             Destroy(this.gameObject, EnemyFlash.spriteBlinkingTotalDuration *2);
         }
     }
