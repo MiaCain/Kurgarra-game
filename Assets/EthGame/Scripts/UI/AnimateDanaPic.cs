@@ -9,6 +9,8 @@ public class AnimateDanaPic : MonoBehaviour
     public RawImage UIFace;
     public Texture FaceReg;
     public Texture FaceCringe;
+    public Texture FaceSmile;
+    public Texture FaceLow;
 
     public void SendRegular()
     {
@@ -18,5 +20,15 @@ public class AnimateDanaPic : MonoBehaviour
     public void SendCringe()
     {
         UIFace.texture = FaceCringe;
+    }
+
+    public void SendSmile()
+    {
+        UIFace.texture = FaceSmile;
+    }
+
+    public void SendHurt()
+    {
+        UIFace.texture = FaceLow;
     }
 }

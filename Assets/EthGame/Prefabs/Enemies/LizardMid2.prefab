@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 693ef26efa5c5e84a8403ab24b6b2c83, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6367e09252009f447b64ee817ef63fa2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -96,7 +96,7 @@ Animator:
   m_GameObject: {fileID: 5636678408655817910}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bc78ab813dc43364caa177a83d51a889, type: 2}
+  m_Controller: {fileID: 9100000, guid: d853260d814e653408ec0ee83caf88a7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -165,12 +165,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  speed: 120
+  speed: 140
   health: 6
-  accTime: 0.25
-  KnockbackPower: 1100
+  accTime: 0.75
+  KnockbackPower: 2000
   EnemyFlash: {fileID: 5636678408655817903}
   dropLootRandom: {fileID: 0}
+  DeathExp: {fileID: 4417139253747203032, guid: 5fb44d3acbc610f44ac7bba32303d80c,
+    type: 3}
 --- !u!114 &5636678408655817903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,11 +203,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Loot:
-  - {fileID: 3241753603326323232, guid: 289f4983b1535c44397d7a3c582fce6a, type: 3}
-  - {fileID: 5844736213067677642, guid: feeeda2cab559f345bf1fbd645e0bfab, type: 3}
   - {fileID: 8533324402655081838, guid: 394127ba20c2c2643904b53307631f76, type: 3}
+  - {fileID: 8533324402655081838, guid: 394127ba20c2c2643904b53307631f76, type: 3}
+  - {fileID: 1894830585532305955, guid: fe22a501fb78dc246a68391824ebdfb6, type: 3}
   - {fileID: 1894830585532305955, guid: fe22a501fb78dc246a68391824ebdfb6, type: 3}
   - {fileID: 137823629010615063, guid: 73f2e2dece1ddad4aa6c884fbb9f54db, type: 3}
   - {fileID: 4981306073759211167, guid: 8adbaf3ee66f30a49922ba7becab13f0, type: 3}
+  - {fileID: 4541108472728174971, guid: 4dbf438bb262cc24a9d3c3439fffd03c, type: 3}
   LootNumber: 0
   CanDrop: 1

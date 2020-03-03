@@ -36,7 +36,7 @@ public class GenericPickup : MonoBehaviour
     // update a timer, if it gets to a late enough point, call blink, then destroy
     void Update()
     {
-        if (WillVanish = true)
+        if (WillVanish == true)
         {
             timer += Time.deltaTime;
             spriteBlinkingMiniDuration = timer / 35;

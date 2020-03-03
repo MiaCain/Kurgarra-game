@@ -26,40 +26,52 @@ public class dropLootRandom : MonoBehaviour
         float Percentage = Random.Range(0.0f, 100.0f);
 
         //use this to calculate likelyhood of different objects being spawned. Heart should be 45%, small coin should be 25%.
-        if (Percentage > 0.0f || Percentage < 45.0f)
+        if (Percentage > 0.0f)
         {
-            //heart
-            return 0;
-        }
 
-        if (Percentage > 45.0f || Percentage < 70.0f)
-        {
-            //small coin
-            return 1;
-        }
+            if (Percentage > 40.0f)
+            {
 
-        if (Percentage > 70.0f || Percentage < 85.0f)
-        {
-            //med coin
-            return 2;
-        }
-
-        if (Percentage > 85.0f || Percentage < 95.0f)
-        {
-            //large coin
-            return 3;
-        }
-
-        if (Percentage > 95.0f || Percentage < 99.5f)
-        {
-            //huge coin
-            return 4;
-        }
-
-        if (Percentage > 99.5f || Percentage < 100.0f)
-        {
-            //mega coin
-            return 5;
+                if (Percentage > 55.0f)
+                {
+                    if (Percentage > 80.0f)
+                    {
+                        if (Percentage > 96.0f)
+                        {
+                            if (Percentage > 99.5f)
+                            {
+                                //huge coin
+                                return 4;
+                            }
+                            else
+                            {
+                                //large coin
+                                return 3;
+                            }
+                        }
+                        else
+                        {
+                            //med coin
+                            return 2;
+                        }
+                    }
+                    else
+                    {
+                        //small coin
+                        return 1;
+                    }
+                }
+                else
+                {
+                    //nothing
+                    return 6;
+                }
+            }
+            else
+            {
+                //heart
+                return 0;
+            }
         }
 
         else

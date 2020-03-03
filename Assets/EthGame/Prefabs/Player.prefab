@@ -10,11 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 2304037392767083199}
   - component: {fileID: 2304037392767083196}
+  - component: {fileID: 9178416706712524604}
   - component: {fileID: 2304037392767083194}
+  - component: {fileID: 7744553167652237043}
   - component: {fileID: 5747881018977394006}
   - component: {fileID: 2304037392767083185}
   - component: {fileID: 9193086005739462192}
   - component: {fileID: 2970410699004021550}
+  - component: {fileID: 5241979086149953856}
   - component: {fileID: 3473226329517967191}
   - component: {fileID: 5291866835759537331}
   m_Layer: 0
@@ -87,6 +90,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9178416706712524604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304037392767083195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11869cd028e2579438acc3aaaaa91756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: {fileID: 0}
+  delay: 10
+  mySpriteRenderer: {fileID: 0}
 --- !u!50 &2304037392767083194
 Rigidbody2D:
   serializedVersion: 4
@@ -108,6 +126,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7744553167652237043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304037392767083195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37d46904fdc96c42bbb54cf88fc25c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmountOwned: {fileID: 0}
+  currentKeys: 0
+  maxKeys: 10
 --- !u!114 &5747881018977394006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d161d0524bb87564cada7dd79ef43629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AmountOwned: {fileID: 0}
   currentMoney: 0
   maxMoney: 256
 --- !u!61 &2304037392767083185
@@ -193,6 +227,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5241979086149953856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304037392767083195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b7195aedfe6d1a47b8c12151cd29d65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AmountOwned: {fileID: 0}
+  currentGrenades: 0
+  maxGrenades: 8
 --- !u!114 &3473226329517967191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c77b60a754ff8644d91c38d7cef89e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanBeDamaged: 1
+  InviTime: 1
   maxHealth: 5
   currentHealth: 5
   HeartImage:

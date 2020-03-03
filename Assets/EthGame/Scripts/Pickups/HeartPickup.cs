@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class HeartPickup : MonoBehaviour
 {
-
+    public GameObject FaceController;
     public bool WillVanish = true;
-    public Health Health;
+    public PickupCounter Health;
     float timer = 0.0f;
 
     float spriteBlinkingTimer = 0.0f;
@@ -16,7 +16,8 @@ public class HeartPickup : MonoBehaviour
 
     private void Start()
     {
-        Health = GameObject.Find("Player").GetComponent<Health>();
+        FaceController = GameObject.Find("FaceController");
+        Health = GameObject.Find("Player").GetComponent<PickupCounter>();
     }
 
     // check to see if player has entered. if yes, call relevant script
@@ -27,6 +28,8 @@ public class HeartPickup : MonoBehaviour
             if (Health.currentHealth < Health.maxHealth)
             {
                 Health.currentHealth = Health.currentHealth + 1;
+                Animator CollAnim = FaceController.GetComponent<Animator>();
+                CollAnim.SetTrigger("Health");
                 Destroy(this.gameObject);
             }
             else
@@ -40,7 +43,7 @@ public class HeartPickup : MonoBehaviour
     // update a timer, if it gets to a late enough point, call blink, then destroy
     void Update()
     {
-        if (WillVanish = true)
+        if (WillVanish == true)
         {
             timer += Time.deltaTime;
             spriteBlinkingMiniDuration = timer / 35;

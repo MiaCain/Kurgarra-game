@@ -8,28 +8,30 @@ public class MoneyPickup : MonoBehaviour
     public int Value;
 
     public bool WillVanish = true;
-    public Money Money;
+    public PickupCounter Money;
     float timer = 0.0f;
 
     float spriteBlinkingTimer = 0.0f;
     float spriteBlinkingMiniDuration = 0.1f;
     float spriteBlinkingTotalTimer = 0.0f;
     float spriteBlinkingTotalDuration = 5.0f;
+    private bool collected;
 
     private void Start()
     {
-        Money = GameObject.Find("Player").GetComponent<Money>();
+        Money = GameObject.Find("Player").GetComponent<PickupCounter>();
     }
 
     // check to see if player has entered. if yes, call relevant script
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && collected == false)
         {
-            Debug.Log("detected player");
+
             if (Money.currentMoney < Money.maxMoney)
             {
                 Money.currentMoney = Money.currentMoney + Value;
+                collected = true;
                 Destroy(this.gameObject);
             }
             else
@@ -43,7 +45,7 @@ public class MoneyPickup : MonoBehaviour
     // update a timer, if it gets to a late enough point, call blink, then destroy
     void Update()
     {
-        if (WillVanish = true)
+        if (WillVanish == true)
         {
             timer += Time.deltaTime;
             spriteBlinkingMiniDuration = timer / 35;

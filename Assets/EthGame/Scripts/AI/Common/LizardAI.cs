@@ -24,13 +24,15 @@ public class LizardAI : MonoBehaviour
     public EnemyFlash EnemyFlash;
     public dropLootRandom dropLootRandom;
 
+    public GameObject DeathExp;
+    private bool isExploding = false;
 
 
+    //Find Player, find animator, find RB, find LootScript
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();
-        Player = GameObject.Find("Player");
         dropLootRandom = this.gameObject.GetComponent<dropLootRandom>();
     }
 
@@ -49,42 +51,54 @@ public class LizardAI : MonoBehaviour
             CanMove = true;
         }
 
-
         if (CanMove == true) { 
-        timeLeft -= Time.deltaTime;
-        if (timeLeft <= 0)
-        {
-            movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
-            if (movement.x >= 0){
-                Anim.SetBool("movingLeft", false);
-            }
-            else
-            {
-                Anim.SetBool("movingLeft", true);
-            }
+          timeLeft -= Time.deltaTime;
+         if (timeLeft <= 0)
+             {
+               movement = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+                if (movement.x >= 0)
+                {
+                    Anim.SetBool("movingLeft", false);
+                }
+
+                else
+                {
+                       Anim.SetBool("movingLeft", true);
+                }
 
             timeLeft += accTime;
+         }
         }
-        }
 
 
-
+        //kill enemy, call flash script
         if (health <= 0)
         {
+            isExploding = true;
             CanMove = false;
             this.tag = "EnemyDying";
             movement = new Vector2 (0f,0f);
             this.EnemyFlash.SpriteDeathEffect();
             dropLootRandom.dropLoot();
+            if (isExploding)
+            {
+                Invoke("explode", EnemyFlash.spriteBlinkingTotalDuration * 2);
+            }
             Destroy(this.gameObject, EnemyFlash.spriteBlinkingTotalDuration *2);
         }
+    }
+
+    void explode()
+    {
+        Instantiate(DeathExp, transform.position, transform.rotation);
+        isExploding = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "PlayerSword")
         {
-            knockbackDir = this.transform.position - Player.transform.position;
+            knockbackDir = this.transform.position - collision.transform.position;
             this.rb.AddForce(knockbackDir.normalized * KnockbackPower);
             health = health - 1;
             this.EnemyFlash.InitOnHit();

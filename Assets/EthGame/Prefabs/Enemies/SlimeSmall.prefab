@@ -105,6 +105,7 @@ MonoBehaviour:
   - {fileID: 1894830585532305955, guid: fe22a501fb78dc246a68391824ebdfb6, type: 3}
   - {fileID: 137823629010615063, guid: 73f2e2dece1ddad4aa6c884fbb9f54db, type: 3}
   - {fileID: 4981306073759211167, guid: 8adbaf3ee66f30a49922ba7becab13f0, type: 3}
+  - {fileID: 4541108472728174971, guid: 4dbf438bb262cc24a9d3c3439fffd03c, type: 3}
   LootNumber: 0
   CanDrop: 1
 --- !u!95 &8234640359828575363
@@ -192,6 +193,8 @@ MonoBehaviour:
   KnockbackPower: 3000
   EnemyFlash: {fileID: 8234640359828575373}
   dropLootRandom: {fileID: 8234640359828575372}
+  DeathExp: {fileID: 4417139253747203032, guid: 5fb44d3acbc610f44ac7bba32303d80c,
+    type: 3}
 --- !u!114 &8234640359828575373
 MonoBehaviour:
   m_ObjectHideFlags: 0

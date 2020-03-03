@@ -6,10 +6,13 @@ public class CharacterControllerOldSword : MonoBehaviour
 {
     Animator Anim;
 
+    bool CanBeDamaged = true;
     bool CanMove = true;
+
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
-    Vector2 movement;
+    public Vector2 movement;
+    public int movementDirection;
 
 
     public GameObject SwordN;
@@ -29,21 +32,25 @@ public class CharacterControllerOldSword : MonoBehaviour
         //Input
         if(CanMove == true) { 
         if (Input.GetButton("up")) {
+            movementDirection = 2;
             Anim.SetInteger("MovementDirection", 2);
             Anim.SetBool("isMoving", true);
             movement.y = 1;
             movement.x = 0;
-
         }
+
         else if (Input.GetButton("down"))
         {
+            movementDirection = 1;
             Anim.SetInteger("MovementDirection", 1);
             Anim.SetBool("isMoving", true);
             movement.y = -1;
             movement.x = 0;
         }
+
         else if (Input.GetButton("left"))
         {
+            movementDirection = 3;
             Anim.SetInteger("MovementDirection", 3);
             Anim.SetBool("isMoving", true);
             movement.y = 0;
@@ -51,6 +58,7 @@ public class CharacterControllerOldSword : MonoBehaviour
         }
         else if (Input.GetButton("right"))
         {
+            movementDirection = 4;
             Anim.SetInteger("MovementDirection", 4);
             Anim.SetBool("isMoving", true);
             movement.y = 0;
@@ -62,11 +70,18 @@ public class CharacterControllerOldSword : MonoBehaviour
             movement.x = 0;
         }
 
-            if (Input.GetButton("b"))
+            if (Input.GetButtonDown("b"))
             {
                 Anim.SetBool("isStabbing", true);
                 CanMove = false;
-                movement = movement / new Vector2(5f, 5f);
+                movement = new Vector2(0f, 0f);
+            }
+
+            if (Input.GetButtonDown("a"))
+            {
+                Anim.SetBool("isStabbing", true);
+                CanMove = false;
+                movement = new Vector2(0f, 0f);
             }
         }
     }
@@ -77,7 +92,7 @@ public class CharacterControllerOldSword : MonoBehaviour
         {
             //Knockback
             knockbackDir = this.transform.position - collision.transform.position;
-            this.rb.AddForce(knockbackDir.normalized * 1500f);
+            this.rb.AddForce(knockbackDir.normalized * 1000f);
         }
 
     }
