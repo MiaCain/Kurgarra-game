@@ -16,10 +16,6 @@ public class InventoryMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetButton("start"))
-        //{
-        //    isOpen = !isOpen;
-        //}
         if (InvMover.transform.position == TargetClosed.transform.position || InvMover.transform.position == TargetOpen.transform.position)
         {
             isMoving = false;

@@ -24,7 +24,6 @@ public class CameraLERPConstant : MonoBehaviour
         else
         {
             isMoving = true;
-            freezeMainScene.enabled = true;
         }
 
         if (isMoving)
