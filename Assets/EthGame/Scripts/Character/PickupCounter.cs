@@ -96,7 +96,6 @@ public class PickupCounter : MonoBehaviour
 
         if (currentHealth <= 1)
         {
-            Debug.Log("doiajwoidj");
             CollAnim.SetBool("LowHealth", true);
         }
 

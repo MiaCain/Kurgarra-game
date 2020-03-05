@@ -9,6 +9,11 @@ public class MaskAI : MonoBehaviour
     public float MMag;
     private Vector2 MDir;
 
+    public bool isFrozen = false;
+
+    private float MMagStore;
+    private Vector2 MDirStore;
+
     private Vector2 deadX;
     private Vector2 deadY;
     private Vector2 pos;
@@ -26,10 +31,9 @@ public class MaskAI : MonoBehaviour
     private void Update()
     {
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
-        if (pos.x < 0.0 || 1.0 < pos.x || pos.y < 0.0 || 1.0 < pos.y)
+        if (pos.x < 0.0 || 1.0 < pos.x || pos.y < 0.0 || 1.0 < pos.y || isFrozen == true)
         {
             CanMove = false;
-            MaskRigid.velocity = new Vector2(0f, 0f);
         }
 
         else
@@ -48,6 +52,31 @@ public class MaskAI : MonoBehaviour
                 MaskRigid.velocity = MDir;
             }
         }
-        
+
+        if (CanMove == false)
+        {
+            MaskRigid.velocity = new Vector2(0f, 0f);
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "MainCamera")
+        {
+            MMagStore = MMag;
+            MDirStore = MDir;
+            isFrozen = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "MainCamera")
+        {
+            MMag = MMagStore;
+            MDir = MDirStore;
+            isFrozen = false;
+        }
     }
 }

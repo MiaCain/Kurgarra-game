@@ -13,7 +13,9 @@ public class LizardAI : MonoBehaviour
 
     Vector3 pos;
     private bool CanMove = true;
+    private bool isFrozen = false;
     private Vector2 movement;
+    private Vector2 StoreMovement;
     private Vector2 knockbackDir;
     public float KnockbackPower = 1500f;
     Rigidbody2D rb;
@@ -26,7 +28,6 @@ public class LizardAI : MonoBehaviour
 
     public GameObject DeathExp;
     private bool isExploding = false;
-
 
     //Find Player, find animator, find RB, find LootScript
     private void Start()
@@ -41,6 +42,12 @@ public class LizardAI : MonoBehaviour
     {
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
         if (pos.x < 0.0 || 1.0 < pos.x || pos.y < 0.0 || 1.0 < pos.y)
+        {
+            CanMove = false;
+            movement = new Vector2(0f, 0f);
+        }
+
+        else if (isFrozen)
         {
             CanMove = false;
             movement = new Vector2(0f, 0f);
@@ -104,9 +111,24 @@ public class LizardAI : MonoBehaviour
             this.EnemyFlash.InitOnHit();
         }
 
+        if (collision.gameObject.tag == "MainCamera")
+        {
+            StoreMovement = movement;
+            isFrozen = true;
+        }
     }
 
-     private void FixedUpdate()
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "MainCamera")
+        {
+            isFrozen = false;
+            CanMove = true;
+            movement = StoreMovement;
+        }
+    }
+
+    private void FixedUpdate()
     {
         rb.AddForce(movement * speed);
     }

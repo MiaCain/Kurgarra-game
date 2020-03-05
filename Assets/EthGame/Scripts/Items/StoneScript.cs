@@ -6,6 +6,8 @@ public class StoneScript : MonoBehaviour
 {
     public Animator animator;
     public Rigidbody2D rb;
+    private bool isFrozen = false;
+    private Vector2 origDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -16,14 +18,19 @@ public class StoneScript : MonoBehaviour
 
     private void Update()
     {
-        if (rb.velocity.y == 0)
+        if (rb.velocity.y == 0 && isFrozen == false)
         {
             rb.constraints = RigidbodyConstraints2D.FreezePositionY;
         }
 
-        if (rb.velocity.x == 0)
+        if (rb.velocity.x == 0 && isFrozen == false)
         {
             rb.constraints = RigidbodyConstraints2D.FreezePositionX;
+        }
+
+        if (isFrozen)
+        {
+            rb.velocity = new Vector2(0,0);
         }
 
         Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);
@@ -38,6 +45,24 @@ public class StoneScript : MonoBehaviour
         animator.SetTrigger("hitObject");
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        origDirection = rb.velocity;
+        if (collision.gameObject.tag == "MainCamera")
+        {
+            isFrozen = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {  
+        if (collision.gameObject.tag == "MainCamera")
+        {
+            isFrozen = false;
+            rb.velocity = origDirection;
+        }
     }
 
     public void DestroyThis()
