@@ -44,18 +44,22 @@ public class LizardAI : MonoBehaviour
         if (pos.x < 0.0 || 1.0 < pos.x || pos.y < 0.0 || 1.0 < pos.y)
         {
             CanMove = false;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
             movement = new Vector2(0f, 0f);
         }
 
         else if (isFrozen)
         {
             CanMove = false;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
             movement = new Vector2(0f, 0f);
         }
 
         else
         {
             CanMove = true;
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
 
         if (CanMove == true) { 

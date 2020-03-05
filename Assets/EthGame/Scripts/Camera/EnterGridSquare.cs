@@ -14,7 +14,6 @@ public class EnterGridSquare : MonoBehaviour
             CameraLERPConstant = MainCam.GetComponent<CameraLERPConstant>();
             CameraLERPConstant.myTargetPosition = this.gameObject;
         }
-            
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -24,6 +23,5 @@ public class EnterGridSquare : MonoBehaviour
             CameraLERPConstant = MainCam.GetComponent<CameraLERPConstant>();
             CameraLERPConstant.myTargetPosition = this.gameObject;
         }
-
     }
 }
