@@ -16,6 +16,7 @@ public class GrenadeFlash : MonoBehaviour
     public Sprite SprNorm;
     public Sprite SprRed;
     public SpriteRenderer Renderer;
+    public bool isFrozen = false;
 
     private void Start()
     {
@@ -24,20 +25,22 @@ public class GrenadeFlash : MonoBehaviour
 
     void Update()
     {
-        Countdown -= Time.fixedDeltaTime;
-
-        spriteBlinkingMiniDuration = -Countdown / 15 * -1;
-
-        if (Countdown <= 3)
+        if (isFrozen == false)
         {
-            SpriteBlinkingEffect();
-        }
+            Countdown -= Time.fixedDeltaTime;
 
-        if (Countdown <= 0)
-        {
-            Destroy (this.gameObject);
-        }
+            spriteBlinkingMiniDuration = -Countdown / 15 * -1;
 
+            if (Countdown <= 3)
+            {
+                SpriteBlinkingEffect();
+            }
+
+            if (Countdown <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
     }
 
 
@@ -65,6 +68,22 @@ public class GrenadeFlash : MonoBehaviour
             {
                 Renderer.sprite = SprNorm;   //make changes
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "MainCamera")
+        {
+            isFrozen = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "MainCamera")
+        {
+            isFrozen = false;
         }
     }
 }

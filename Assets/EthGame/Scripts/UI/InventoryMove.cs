@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryMove : MonoBehaviour
 {
     public bool isOpen = false;
-    private bool isMoving = false;
+    public bool isMoving = false;
     public GameObject InvMover;
     public GameObject TargetOpen;
     public GameObject TargetClosed;
@@ -20,15 +20,29 @@ public class InventoryMove : MonoBehaviour
         {
             isMoving = false;
         }
+        else
+        {
+            isMoving = true;
+        }
+
+        if (isMoving || isOpen)
+        {
+            freezeMainScene.enabled = true;
+        }
+
+        else
+        {
+            freezeMainScene.enabled = false;
+        }
 
         if (isOpen)
         {
             
             float step = speed * Time.deltaTime;
             InvMover.transform.position = Vector3.MoveTowards(InvMover.transform.position, TargetOpen.transform.position, step);
-            freezeMainScene.enabled = true;
+            //freezeMainScene.enabled = true;
 
-            if (Input.GetButton("start") && isMoving == false)
+            if (Input.GetButtonDown("start") && isMoving == false)
             {
                 isMoving = true;
                 isOpen = false;
@@ -40,7 +54,7 @@ public class InventoryMove : MonoBehaviour
             
             float step = speed * Time.deltaTime;
             InvMover.transform.position = Vector3.MoveTowards(InvMover.transform.position, TargetClosed.transform.position, step);
-            freezeMainScene.enabled = false;
+            //freezeMainScene.enabled = false;
 
             if (Input.GetButton("start") && isMoving == false)
             {

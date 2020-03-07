@@ -18,13 +18,15 @@ public class CameraLERPConstant : MonoBehaviour
         if(transform.position == myTargetPosition.transform.position)
         {
             isMoving = false;
-            freezeMainScene.enabled = false;
+            //freezeMainScene.enabled = false;
         }
 
         else
         {
             isMoving = true;
+            freezeMainScene.enabled = true;
         }
+
 
         if (isMoving)
         {

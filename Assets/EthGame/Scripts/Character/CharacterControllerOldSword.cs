@@ -7,13 +7,12 @@ public class CharacterControllerOldSword : MonoBehaviour
     Animator Anim;
 
     bool CanBeDamaged = true;
-    bool CanMove = true;
+    public bool CanMove = true;
 
     public float moveSpeed = 5f;
     public Rigidbody2D rb;
     public Vector2 movement;
     public int movementDirection;
-
 
     public GameObject SwordN;
     public GameObject SwordS;
@@ -21,6 +20,8 @@ public class CharacterControllerOldSword : MonoBehaviour
     public GameObject SwordW;
 
     private Vector2 knockbackDir;
+    public bool isFrozen = false;
+    private Vector2 StoreMovement;
 
     void Start()
     {
@@ -30,45 +31,48 @@ public class CharacterControllerOldSword : MonoBehaviour
     void Update()
     {
         //Input
-        if(CanMove == true) { 
-        if (Input.GetButton("up")) {
-            movementDirection = 2;
-            Anim.SetInteger("MovementDirection", 2);
-            Anim.SetBool("isMoving", true);
-            movement.y = 1;
-            movement.x = 0;
-        }
+        if(CanMove == true)
+        {
+            if (Input.GetButton("up"))
+            {
+                movementDirection = 2;
+                Anim.SetInteger("MovementDirection", 2);
+                Anim.SetBool("isMoving", true);
+                movement.y = 1;
+                movement.x = 0;
+            }
 
-        else if (Input.GetButton("down"))
-        {
-            movementDirection = 1;
-            Anim.SetInteger("MovementDirection", 1);
-            Anim.SetBool("isMoving", true);
-            movement.y = -1;
-            movement.x = 0;
-        }
+            else if (Input.GetButton("down"))
+            {
+                movementDirection = 1;
+                Anim.SetInteger("MovementDirection", 1);
+                Anim.SetBool("isMoving", true);
+                movement.y = -1;
+                movement.x = 0;
+            }
 
-        else if (Input.GetButton("left"))
-        {
-            movementDirection = 3;
-            Anim.SetInteger("MovementDirection", 3);
-            Anim.SetBool("isMoving", true);
-            movement.y = 0;
-            movement.x = -1;
-        }
-        else if (Input.GetButton("right"))
-        {
-            movementDirection = 4;
-            Anim.SetInteger("MovementDirection", 4);
-            Anim.SetBool("isMoving", true);
-            movement.y = 0;
-            movement.x = 1;
-        }
-        else{
-            Anim.SetBool("isMoving", false);
-            movement.y = 0;
-            movement.x = 0;
-        }
+            else if (Input.GetButton("left"))
+            {
+                movementDirection = 3;
+                Anim.SetInteger("MovementDirection", 3);
+                Anim.SetBool("isMoving", true);
+                movement.y = 0;
+                movement.x = -1;
+            }
+            else if (Input.GetButton("right"))
+            {
+                movementDirection = 4;
+                Anim.SetInteger("MovementDirection", 4);
+                Anim.SetBool("isMoving", true);
+                movement.y = 0;
+                movement.x = 1;
+            }
+            else
+            {
+                Anim.SetBool("isMoving", false);
+                movement.y = 0;
+                movement.x = 0;
+            }
 
             if (Input.GetButtonDown("b"))
             {
@@ -94,14 +98,27 @@ public class CharacterControllerOldSword : MonoBehaviour
             knockbackDir = this.transform.position - collision.transform.position;
             this.rb.AddForce(knockbackDir.normalized * 1000f);
         }
-
+        if (collision.gameObject.tag == "MainCamera")
+        {
+            StoreMovement = movement;
+            isFrozen = true;
+            CanMove = false;
+        }
     }
 
-    void FixedUpdate()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        //Movement
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        if (collision.gameObject.tag == "MainCamera")
+        {
+            isFrozen = false;
+            CanMove = true;
+            movement = StoreMovement;
+        }
+    }
 
+    private void FixedUpdate()
+    {
+        rb.velocity = movement * moveSpeed;
     }
 
     public void HitEnemyNorth()
