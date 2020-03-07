@@ -8081,6 +8081,7 @@ GameObject:
   - component: {fileID: 1838152327}
   - component: {fileID: 1838152329}
   - component: {fileID: 1838152328}
+  - component: {fileID: 1838152330}
   m_Layer: 5
   m_Name: uiSelector
   m_TagString: Untagged
@@ -8140,6 +8141,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838152326}
   m_CullTransparentMesh: 0
+--- !u!114 &1838152330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838152326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f18b19bb3303d7046b96247021f475e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InvMove: {fileID: 330418540}
+  ItemScript: {fileID: 2304037392186067202}
+  ItemsOwned: {fileID: 2304037392186067204}
+  ItemList:
+  - {fileID: 620610111}
+  - {fileID: 2101686911}
+  - {fileID: 1435689923}
+  - {fileID: 1973206782}
+  - {fileID: 1795601693}
+  - {fileID: 1085944710}
+  - {fileID: 1494327654}
+  - {fileID: 981518600}
+  - {fileID: 8500488}
+  - {fileID: 2042190830}
+  - {fileID: 2047399921}
+  - {fileID: 1050197375}
+  - {fileID: 350727815}
+  - {fileID: 1649658375}
+  - {fileID: 1138525923}
+  - {fileID: 2051598560}
+  Selector: {fileID: 1838152326}
+  CurrentItem: 0
+  Row: 0
+  Edge: 0
 --- !u!1001 &1852355294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44267,6 +44304,7 @@ GameObject:
   - component: {fileID: 5291866836553479945}
   - component: {fileID: 9178416707104078982}
   - component: {fileID: 2304037392186067203}
+  - component: {fileID: 2304037392186067204}
   - component: {fileID: 2304037392186067202}
   m_Layer: 0
   m_Name: Player
@@ -44290,6 +44328,7 @@ MonoBehaviour:
   ItemType: 2
   PickupCounter: {fileID: 2304037392186067203}
   CharContr: {fileID: 5291866836553479945}
+  ItemOwn: {fileID: 2304037392186067204}
   GrenadeItem: {fileID: 6591640926234725509, guid: 7c5af1b4bcfc28241ad6e10d81324388,
     type: 3}
   GrenadeVelocity: 2
@@ -44341,6 +44380,19 @@ MonoBehaviour:
   GrenadesOwned: {fileID: 1073031135}
   currentGrenades: 8
   maxGrenades: 8
+--- !u!114 &2304037392186067204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2304037392186067201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64ca3f663bb55d4eaadfffbc74f1d6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasItem: 01010101010101010101010101010101
 --- !u!4 &2304037392186067205
 Transform:
   m_ObjectHideFlags: 0

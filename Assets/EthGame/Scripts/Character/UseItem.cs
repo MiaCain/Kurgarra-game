@@ -4,8 +4,22 @@ using UnityEngine;
 
 //Item Guide:
 //0 Nothing
-//1 Grenades
-//2 Stones
+//1 Stones
+//2 Grenades
+//3 Shield
+//4 Lyre
+//5 Crook
+//6 Flail
+//7 Head
+//8 Headgear
+//9 Boat
+//10 Tablet
+//11 Statue
+//12 Ring
+//13 Sandal
+//14 Ladder
+//15 Jar
+//16 Key
 
 public class UseItem : MonoBehaviour
 {
@@ -13,6 +27,7 @@ public class UseItem : MonoBehaviour
     public int ItemType;
     public PickupCounter PickupCounter;
     public CharacterControllerOldSword CharContr;
+    public ItemsOwned ItemOwn;
 
     [Header("GrenadeInput")]
     public GameObject GrenadeItem;
@@ -25,6 +40,7 @@ public class UseItem : MonoBehaviour
     //Non public
     private bool IsSpawning = false;
     private int CharMovement;
+    private bool OwnsItem;
 
     private void Start()
     {
@@ -39,8 +55,19 @@ public class UseItem : MonoBehaviour
         //track direction
         CharMovement = CharContr.movementDirection;
 
+        //check if item is owned
+        if(ItemOwn.hasItem[ItemType - 1])
+        {
+            OwnsItem = true;
+        }
+
+        else
+        {
+            OwnsItem = false;
+        }
+
         //get input
-        if (Input.GetButtonDown("a"))
+        if (Input.GetButtonDown("a") && OwnsItem)
         {
             IsSpawning = true;
 
@@ -51,6 +78,15 @@ public class UseItem : MonoBehaviour
 
             else if (ItemType == 1)
             {
+                if (PickupCounter.currentStones > 0)
+                {
+                    SpawnItem(StoneItem, StoneVelocity);
+                    PickupCounter.currentStones = PickupCounter.currentStones - 1;
+                }
+            }
+
+            else if (ItemType == 2)
+            {
                 if(PickupCounter.currentGrenades > 0)
                 {
                     SpawnItem(GrenadeItem, GrenadeVelocity);
@@ -58,14 +94,7 @@ public class UseItem : MonoBehaviour
                 }
             }
 
-            else if (ItemType == 2)
-            {
-                if (PickupCounter.currentStones > 0)
-                {
-                    SpawnItem(StoneItem, StoneVelocity);
-                    PickupCounter.currentStones = PickupCounter.currentStones - 1;
-                }
-            }
+
         }
     }
 
